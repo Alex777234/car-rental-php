@@ -37,8 +37,7 @@
       </form>
   </section>
 
-  <script src="js/main.js"></script>
-  <script src="js/post.js"></script>
+  <script src="js/posts/regUsers.js"></script>
 </body>
 
 </html>

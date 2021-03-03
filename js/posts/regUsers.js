@@ -1,8 +1,18 @@
 const URL_PATH = '../controllers/';
 
-// register new users
-const regUserBtn = document.querySelector('#regUserBtn');
+// Showing the user server errors
+const renderResponse = (json) => {
+  if (json.status === 400) {
+    alert(json.message);
+  }
+  if (json.status === 201) {
+    alert(json.message);
+    document.location.href = '/';
+  }
+}
 
+// Register new users
+const regUserBtn = document.querySelector('#regUserBtn');
 regUserBtn.addEventListener('click', async (e) => {
   e.preventDefault();
   let username = document.querySelector('input[name="user_name"]');
@@ -48,15 +58,5 @@ regUserBtn.addEventListener('click', async (e) => {
     body: formData
   })
     .then((response) => response.json())
-    .then((json) => alertErrors(json))
+    .then(res => renderResponse(res))
 });
-
-let alertErrors = (json) => {
-  if (json.status === 400) {
-    alert(json.message);
-  }
-  if (json.status === 201) {
-    alert(json.message);
-    document.location.href = '/';
-  }
-}

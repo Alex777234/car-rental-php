@@ -18,8 +18,8 @@ if ($username == '' || $email == '' || $pass == '') {
     "status" => 400,
     "message" => "Проверьте правильность полей"
   ];
+  http_response_code(400);
   echo json_encode($response);
-  exit();
 } 
 else {
   if ($row > 0) {
@@ -27,8 +27,8 @@ else {
       "status" => 400,
       "message" => "Пользователь ".$email." уже существует"
     ];
+    http_response_code(400);
     echo json_encode($response);
-    exit();
   } else {
     $pass = md5($pass);
     $query = $pdo->prepare("INSERT INTO `users` (`name`, `email`, `password`) VALUES (:name, :email, :password)");
@@ -49,6 +49,7 @@ else {
       "status" => 201,
       "message" => "Успешная регистрация!"
     ];
+    http_response_code(201);
     echo json_encode($response);
   }
 }

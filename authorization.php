@@ -21,14 +21,14 @@
           <p class="logo__desc">Прокат автомобилей</p>
         </div>
         <h3 class="form-auth__title">Авторизация</h3>
-        <input type="email" placeholder="Введите email" class="form-auth__input">
-        <input type="password" placeholder="Введите пароль" class="form-auth__input">
-        <button class="btn form-auth__btn">Войти</button>
+        <input type="email"  name="email" placeholder="Введите email" class="form-auth__input">
+        <input type="password"  name="password" placeholder="Введите пароль" class="form-auth__input">
+        <button type="submit" class="btn form-auth__btn" id="authUserBtn">Войти</button>
         <a href="registration.php" class="form-auth__link">Регистрация нового аккаунта</a>
       </form>
   </section>
 
-  <script src="js/main.js"></script>
+  <script src="js/posts/authUsers.js"></script>>
 </body>
 
 </html>
