@@ -1,3 +1,9 @@
+<?php 
+  session_start();
+  if ($_SESSION['user']) {
+    header("Location: /");
+  }
+?>
 <!DOCTYPE html>
 <html lang="ru">
 

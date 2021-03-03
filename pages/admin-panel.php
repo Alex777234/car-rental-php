@@ -59,10 +59,11 @@
       <nav class="nav">
         <ul class="nav-list">
           <li class="nav-list__item"><a href="../index.php" class="nav-list__link">Главная</a></li>
-          <li class="nav-list__item"><a class="nav-list__link" active>Автопарк</a></li>
+          <li class="nav-list__item"><a class="nav-list__link">Автопарк</a></li>
           <li class="nav-list__item"><a href="price.php" class="nav-list__link">Тарифы</a></li>
           <li class="nav-list__item"><a href="about.php" class="nav-list__link">О компании</a></li>
           <li class="nav-list__item"><a href="contact.php" class="nav-list__link">Контакты</a></li>
+          <li class="nav-list__item"><a class="nav-list__link" active>| Работа с БД</a></li>
         </ul>
       </nav>
       <div class="phone">
@@ -107,59 +108,134 @@
       </div>
     </div>
   </section>
-  <section class="autopark">
+  <section class="admin admin__block">
     <div class="container">
       <div class="row">
-        <div class="col-xl-3 filter filter__content">
-          <h3 class="filter__title">Фильтр поиска</h3>
-          <div class="filter__stamp">
-            <h4 class="filter__subtitle">Марка авто</h4>
-            <label for="mercedes" class="filter__label">
-              <input type="checkbox" name="" id="mercedes">
-              Mercedes-Benz
-            </label>
-            <label for="bmw" class="filter__label">
-              <input type="checkbox" name="" id="bmw">
-              BMW
-            </label>
-            <label for="audi" class="filter__label">
-              <input type="checkbox" name="" id="audi">
-              Audi
-            </label>
-          </div>
-          <div class="filter__price">
-            <h4 class="filter__subtitle">Цена бронирования</h4>
-            <div class="filter__price_row">
-              <input type="text" placeholder="От">
-              <input type="text" placeholder="До">
-            </div>
-          </div>
-          <button class="btn filter__btn">Применить</button>
+        <div class="col-xl-6">
+          <span class="admin__name">Добрый день, <?php echo $_SESSION['admin']['name'];?>
+            <a href="../controllers/exitUser.php">Выход</a>
+          </span>
+          <h1 class="admin__title">Админ-панель для работы с&nbsp;базой данных</h1>
         </div>
-        <div class="col-xl-9">
-          <div class="row">
-            <div class="col-xl-4 col-lg-4 col-md-6">
-              <div class="news-card autopark-card">
-                <div class="news-card__image">
-                  <img src="../img/news/car_1.png" alt="Изображение автомобиля" class="news-card__img">
-                </div>
-                <h3 class="news-card__title">BMW 320</h3>
-                <a href="pages/autopark.php" class="btn news-card__btn">Забронировать</a>
-                <div class="news-card__info">
-                  <span class="news-card__setting">
-                    <img src="../img/news/settings.svg" alt="Иконка карточки">
-                    АКПП</span>
-                  <span class="news-card__setting">
-                    <img src="../img/news/calendar.svg" alt="Иконка карточки">
-                    2020</span>
-                  <span class="news-card__setting">
-                    <img src="../img/news/paper.svg" alt="Иконка карточки">
-                    2.0 л</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+      </div>
+      <div class="row admin__content">
+      <div class="col-xl-12 panel panel__content">
+        <h2 class="panel__title">Найти авто</h2>
+        <form class="panel-form panel-form__search">
+          <input type="search" name="" id="search" placeholder="Введите название авто">
+          <button type="submit" class="btn panel-form__btn">Найти</button>
+        </form>
+      </div>
+      <div class="col-xl-4 col-lg-6 panel panel__content">
+        <h2 class="panel__title">Добавить авто</h2>
+        <form class="panel-form">
+          <label for="select-brands">
+            Марка авто
+            <select name="brand_add" id="brand_add" >
+              <?php 
+                require '../config/connect.php';
+                $query = $pdo->query('SELECT * FROM `brands`');
+                while ($row = $query->fetch(PDO::FETCH_OBJ)) {
+                  echo '<option name="option" value="'.$row->id_brand.'">'.$row->name_brand.'</option>';
+                }
+              ?>
+            </select>
+          </label>
+          <label for="">
+            Название авто
+            <input type="text" name="name_add" id="">
+          </label>
+          <label for="">
+            Изображение авто
+            <input type="file" name="" id="" class="input__file">
+          </label>
+          <label for="">
+            Тип коробки передач
+            <select name="" id="" >
+            <?php 
+                require '../config/connect.php';
+                $query = $pdo->query('SELECT * FROM `type_box`');
+                while ($row = $query->fetch(PDO::FETCH_OBJ)) {
+                  echo '<option value="'.$row->id_type.'">'.$row->name_type.'</option>';
+                }
+              ?>
+            </select>
+          </label>
+          <label for="">
+            Год релиза авто
+            <input type="text" id="">
+          </label>
+          <label for="">
+            Объём двигателя авто
+            <input type="text" id="">
+          </label>
+          <label for="">
+            Стоимость аренды (за сутки)
+            <input type="text" id="">
+          </label>
+          <button type="submit" class="btn panel-form__btn" id="addItem">Добавить</button>
+        </form>
+      </div>
+      <div class="col-xl-4 col-lg-6 panel panel__content">
+        <h2 class="panel__title">Изменить авто</h2>
+        <form class="panel-form">
+        <label for="select-brands">
+            ID авто
+            <select name="" id="" >
+              <option value="">1</option>
+              <option value="">2</option>
+            </select>
+          </label>
+          <label for="select-brands">
+            Марка авто
+            <select name="" id="" >
+              <option value="">Mercedes-Benz</option>
+              <option value="">Tayouta</option>
+            </select>
+          </label>
+          <label for="">
+            Название авто
+            <input type="text" id="">
+          </label>
+          <label for="select-brands">
+            Тип коробки передач
+            <select name="" id="" >
+              <option value="">АКПП</option>
+              <option value="">МКПП</option>
+            </select>
+          </label>
+          <label for="">
+            Год релиза авто
+            <input type="text" id="">
+          </label>
+          <label for="">
+            Объём двигателя авто
+            <input type="text" id="">
+          </label>
+          <label for="">
+            Стоимость аренды (за сутки)
+            <input type="text" id="">
+          </label>
+          <button type="submit" class="btn panel-form__btn">Изменить</button>
+        </form>
+      </div>
+      <div class="col-xl-4 col-lg-6 panel panel__content">
+        <h2 class="panel__title">Удалить авто</h2>
+        <form class="panel-form">
+          <label for="select-brands">
+            ID авто
+            <select name="" id="" >
+              <option value="">1</option>
+              <option value="">2</option>
+            </select>
+          </label>
+          <label for="">
+            Название авто
+            <input type="text" id="">
+          </label>
+          <button type="submit" class="btn panel-form__btn">Удалить</button>
+        </form>
+      </div>
       </div>
     </div>
   </section>
@@ -212,6 +288,7 @@
 </footer>
 
   <script src="../js/main.js"></script>
+  <script src="../js/posts/addItem.js"></script>
 </body>
 
 </html>

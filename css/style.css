@@ -872,6 +872,121 @@ a:focus {
   transition: 0.2s;
 }
 
+/* admin panel page */
+.admin__block {
+  margin-top: 100px;
+}
+
+.admin__content {
+  padding-top: 100px;
+}
+
+.admin__name {
+  font-weight: 500;
+  font-size: 18px;
+}
+
+.admin__name > a {
+  text-decoration: none;
+  margin-left: 10px;
+  color: var(--activeColor);
+}
+
+.admin__name > a:hover {
+  text-decoration: underline;
+}
+
+.admin__title {
+  margin-top: 20px;
+  font-size: 35px;
+  font-weight: 900;
+  line-height: 40px;
+}
+
+.panel__content:not(:last-child) {
+  margin-bottom: 50px;
+}
+
+.panel__title {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 30px;
+  text-transform: uppercase;
+}
+
+.panel-form {
+  height: auto;
+  padding: 15px;
+  background-color: white;
+  box-shadow: 0 0 30px rgba(0,0,0, 0.07);
+  border-radius: 5px;
+}
+
+.panel-form__search {
+  display: flex;
+  align-items: center;
+}
+
+
+#search {
+  border-radius: 5px;
+  font-family: 'Montserrat', 'Arial', sans-serif;
+  height: 50px;
+  border: 2px solid rgba(0,0,0, 0.1);
+  padding-left: 10px;
+  transition: 0.3s;
+  width: 100%;
+  margin-right: 15px;
+}
+
+.panel-form > label {
+  display: flex;
+  flex-direction: column;
+  font-weight: 500;
+  margin-bottom: 25px;
+}
+
+.panel-form > label > select {
+  border-radius: 5px;
+  font-family: 'Montserrat', 'Arial', sans-serif;
+  height: 50px;
+  margin-top: 10px;
+  border: 2px solid rgba(0,0,0, 0.1);
+  padding-left: 5px;
+  transition: 0.3s;
+}
+
+.panel-form > label > input {
+  height: 44px;
+  border-radius: 5px;
+  margin-top: 10px;
+  font-family: 'Montserrat', 'Arial', sans-serif;
+  border: 2px solid rgba(0,0,0, 0.1);
+  display: flex;
+  align-items: center;
+  padding-left: 10px;
+  transition: 0.3s;
+}
+
+.panel-form > label > input:focus,
+.panel-form > label > select:focus {
+  border: 2px solid var(--activeColor);
+  transition: 0.3s;
+}
+
+input[type="file"] {
+  height: 24px !important;
+  padding-left: 0 !important; 
+}
+
+.panel-form__btn {
+  margin: 0 auto;
+  background: none;
+}
+
+.panel-form__btn:hover {
+  background-color: var(--activeColor);
+}
 /* Media queries */
 /* Small devices (landscape phones, 576px and up) */
 @media (max-width: 576px) {
@@ -896,6 +1011,22 @@ a:focus {
   }
   .form-auth > input {
     width: 90%;
+  }
+  .admin__title {
+    font-size: 30px;
+  }
+  .panel-form__search {
+    flex-direction: column;
+  }
+  #search {
+    margin-bottom: 20px;
+    margin-right: 0;
+  }
+  .admin__name, .admin__title {
+    text-align: center;
+  }
+  .panel__title {
+    text-align: center;
   }
 }
 

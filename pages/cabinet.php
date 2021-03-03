@@ -22,8 +22,12 @@
         <p class="address__text">г. Новосибирск, ул. Кирова 228</p>
       </address>
       <a class="cabinet"><?php
-        if ($_SESSION['user']) {
-          echo $_SESSION['user']['name'];
+        if ($_SESSION['user'] || $_SESSION['admin']) {
+          if ($_SESSION['user']) {
+            echo $_SESSION['user']['name'];
+          } else {
+            echo $_SESSION['admin']['name'];
+          }
         } else {
           echo 'Личный кабинет';
         }
@@ -33,9 +37,9 @@
       </a>
       <div class="drop-cabinet drop__cabinet">
         <?php 
-          if ($_SESSION['user']) {
-            echo '<a href="#" class="drop-cabinet__link_empty">Личный кабинет</a>';
-            echo '<a href="../controllers/exitUser.php" class="drop-cabinet__link_empty">Выход</a>';
+          if ($_SESSION['user'] || $_SESSION['admin']) {
+            echo '<a href="pages/cabinet.php" class="drop-cabinet__link_empty">Личный кабинет</a>';
+            echo '<a href="controllers/exitUser.php" class="drop-cabinet__link_empty">Выход</a>';
           } else {
             echo '<a href="authorization.php" class="drop-cabinet__link">Авторизация</a>';
             echo '<a href="registration.php" class="drop-cabinet__link">Регистрация</a>';
@@ -59,6 +63,11 @@
             <li class="nav-list__item"><a href="price.php" class="nav-list__link">Тарифы</a></li>
             <li class="nav-list__item"><a href="about.php" class="nav-list__link">О компании</a></li>
             <li class="nav-list__item"><a href="contact.php" class="nav-list__link">Контакты</a></li>
+            <?php
+              if ($_SESSION['admin']) {
+                echo '<li class="nav-list__item"><a href="#" class="nav-list__link">| Работа с БД</a></li>';
+              }
+            ?>
           </ul>
         </nav>
         <div class="phone">

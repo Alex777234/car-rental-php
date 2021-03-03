@@ -39,11 +39,19 @@ else {
     $user->execute([':email' => $email]);
     $count = $user->fetch(PDO::FETCH_OBJ);
 
-    $_SESSION['user'] = [
-      "id" => $count->id_user,
-      "name" => $count->name,
-      "email" => $count->email
-    ];
+    if ($count->email === "liberty-car-admin@mail.ru") {
+      $_SESSION['admin'] = [
+        "id" => $count->id_user,
+        "name" => $count->name,
+        "email" => $count->email
+      ];
+    } else {
+      $_SESSION['user'] = [
+        "id" => $count->id_user,
+        "name" => $count->name,
+        "email" => $count->email
+      ];
+    }
 
     $response = [
       "status" => 201,

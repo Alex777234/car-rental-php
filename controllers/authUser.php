@@ -30,11 +30,20 @@ else {
       "message" => "Успешная авторизация!"
     ];
 
-    $_SESSION['user'] = [
-      "id" => $row->id_user,
-      "name" => $row->name,
-      "email" => $row->email
-    ];
+    if ($row->email === 'liberty-car-admin@mail.ru') {
+      $_SESSION['admin'] = [
+        "id" => $row->id_user,
+        "name" => $row->name,
+        "email" => $row->email
+      ];
+    } else {
+      $_SESSION['user'] = [
+        "id" => $row->id_user,
+        "name" => $row->name,
+        "email" => $row->email
+      ];
+    }
+
 
     http_response_code(200);
     echo json_encode($response);
