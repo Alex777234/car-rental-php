@@ -126,100 +126,72 @@
           <button type="submit" class="btn panel-form__btn">Найти</button>
         </form>
       </div>
-      <div class="col-xl-4 col-lg-6 panel panel__content">
-        <h2 class="panel__title">Добавить авто</h2>
+      <div class="col-xl-6 col-lg-6 panel panel__content">
+        <h2 class="panel__title">Добавить | Изменить авто</h2>
         <form class="panel-form">
-          <label for="select-brands">
-            Марка авто
-            <select name="brand_add" id="brand_add" >
-              <?php 
-                require '../config/connect.php';
-                $query = $pdo->query('SELECT * FROM `brands`');
-                while ($row = $query->fetch(PDO::FETCH_OBJ)) {
-                  echo '<option name="option" value="'.$row->id_brand.'">'.$row->name_brand.'</option>';
-                }
-              ?>
-            </select>
-          </label>
-          <label for="">
-            Название авто
-            <input type="text" name="name_add" id="">
-          </label>
-          <label for="">
-            Изображение авто
-            <input type="file" name="" id="" class="input__file">
-          </label>
-          <label for="">
-            Тип коробки передач
-            <select name="" id="" >
+
+          <label for="id-auto">ID авто</label>
+          <select name="id-auto" id="id-auto" class="panel-form__select">
+            <option value="0">Добавить новый автомобиль</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+          </select>
+
+          <label for="brand">Марка авто</label>
+          <select name="brand" id="brand" class="panel-form__select">
             <?php 
-                require '../config/connect.php';
-                $query = $pdo->query('SELECT * FROM `type_box`');
-                while ($row = $query->fetch(PDO::FETCH_OBJ)) {
-                  echo '<option value="'.$row->id_type.'">'.$row->name_type.'</option>';
-                }
-              ?>
-            </select>
-          </label>
-          <label for="">
-            Год релиза авто
-            <input type="text" id="">
-          </label>
-          <label for="">
-            Объём двигателя авто
-            <input type="text" id="">
-          </label>
-          <label for="">
-            Стоимость аренды (за сутки)
-            <input type="text" id="">
-          </label>
+              require '../config/connect.php';
+              $query = $pdo->query('SELECT * FROM `brands`');
+              while ($row = $query->fetch(PDO::FETCH_OBJ)) {
+                echo '<option name="option" value="'.$row->id_brand.'">'.$row->name_brand.'</option>';
+              }
+            ?>
+          </select>
+
+          <label for="name">Название авто</label>
+          <input type="text" name="name" id="name" class="panel-form__input">
+
+          <label for="file">Изображение авто</label>
+          <input type="file" name="file" id="file" accept="image/png" class="panel-form__input ">
+
+          <label for="type-box">Тип коробки передач</label>
+          <select name="type_box" id="type-box" class="panel-form__select">
+            <?php 
+              require '../config/connect.php';
+              $query = $pdo->query('SELECT * FROM `type_box`');
+              while ($row = $query->fetch(PDO::FETCH_OBJ)) {
+                echo '<option value="'.$row->id_type.'">'.$row->name_type.'</option>';
+              }
+            ?>
+          </select>
+
+          <label for="year">Год релиза авто</label>
+          <select name="capacity" id="year" class="panel-form__select">
+            <option value="2021">2021</option>
+            <option value="2020">2020</option>
+            <option value="2019">2019</option>
+            <option value="2018">2018</option>
+            <option value="2017">2017</option>
+            <option value="2016">2016</option>
+            <option value="2015">2015</option>
+          </select>
+
+          <label for="capacity">Объём двигателя авто</label>
+          <select name="capacity" id="capacity" class="panel-form__select">
+            <option value="2.0">2.0</option>
+            <option value="2.5">2.5</option>
+            <option value="3.0">3.0</option>
+            <option value="3.5">3.5</option>
+            <option value="5.0">5.0</option>
+          </select>
+
+          <label for="rental">Стоимость аренды (за сутки)</label>
+          <input type="text" id="rental" name="rental" class="panel-form__input ">
+
           <button type="submit" class="btn panel-form__btn" id="addItem">Добавить</button>
         </form>
       </div>
-      <div class="col-xl-4 col-lg-6 panel panel__content">
-        <h2 class="panel__title">Изменить авто</h2>
-        <form class="panel-form">
-        <label for="select-brands">
-            ID авто
-            <select name="" id="" >
-              <option value="">1</option>
-              <option value="">2</option>
-            </select>
-          </label>
-          <label for="select-brands">
-            Марка авто
-            <select name="" id="" >
-              <option value="">Mercedes-Benz</option>
-              <option value="">Tayouta</option>
-            </select>
-          </label>
-          <label for="">
-            Название авто
-            <input type="text" id="">
-          </label>
-          <label for="select-brands">
-            Тип коробки передач
-            <select name="" id="" >
-              <option value="">АКПП</option>
-              <option value="">МКПП</option>
-            </select>
-          </label>
-          <label for="">
-            Год релиза авто
-            <input type="text" id="">
-          </label>
-          <label for="">
-            Объём двигателя авто
-            <input type="text" id="">
-          </label>
-          <label for="">
-            Стоимость аренды (за сутки)
-            <input type="text" id="">
-          </label>
-          <button type="submit" class="btn panel-form__btn">Изменить</button>
-        </form>
-      </div>
-      <div class="col-xl-4 col-lg-6 panel panel__content">
+      <div class="col-xl-6 col-lg-6 panel panel__content">
         <h2 class="panel__title">Удалить авто</h2>
         <form class="panel-form">
           <label for="select-brands">

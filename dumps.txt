@@ -3,3 +3,9 @@ INSERT INTO `brands` (`name_brand`) VALUES ('Acura'),('Adler'),('Alfa Romeo'),('
 
 ДАМП КОРОБОК ПЕРЕДАЧ:
 INSERT INTO `type_box` (`name_type`) VALUES ('АКПП'),('МКПП')
+
+
+Регулярка для проверка авто
+^([a-z-A-Z]+\s)([a-z-A-Z-0-9]+$|([a-z-A-Z-0-9]+\s)[a-z-A-Z-0-9]+)$
+
+^\d+$

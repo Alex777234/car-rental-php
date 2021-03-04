@@ -20,6 +20,7 @@ if ($username == '' || $email == '' || $pass == '') {
   ];
   http_response_code(400);
   echo json_encode($response);
+  exit();
 } 
 else {
   if ($row > 0) {
@@ -29,6 +30,7 @@ else {
     ];
     http_response_code(400);
     echo json_encode($response);
+    exit();
   } else {
     $pass = md5($pass);
     $query = $pdo->prepare("INSERT INTO `users` (`name`, `email`, `password`) VALUES (:name, :email, :password)");
