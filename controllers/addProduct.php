@@ -11,21 +11,41 @@ $year = $_POST['year'];
 $capacity = $_POST['capacity'];
 $rental = $_POST['rental'];
 
-if ($brand == '' || $name == '' || $img == '' || $box == '' || $year == '' || $capacity == '' || $rental == '') {
+// if (!empty($_FILES['image']['tmp_name'])) {
+//   $path = __DIR__ . "\\upload\\upload-files" . $_FILES['image']['name']; // путь загрузки файла 
+//   if (copy($_FILES['image']['tmp_name'], $path)) {
+//     $img = $path;
+//   }
+// }
+
+$img = addslashes(file_get_contents($_FILES['image']['tmp_name']));
+
+if ($brand == '' || $name == '' || $box == '' || $year == '' || $capacity == '' || $rental == '') {
   $response = [
     "status" => 400,
     "message" => "Проверьте правильность полей"
   ];
   http_response_code(400);
-  echo json_encode($response);
-  exit();
+  echo json_encode($img);
 } 
 else {
+  $query = $pdo->prepare("INSERT INTO `product` (`id_brand`, `name_auto`, `img_auto`, `id_box`, `year_release`, `engine_capacity`, `price_rental`)
+  VALUES (:brand, :name, :img, :id_box, :year_release, :engine, :rental)");
+  $query->execute([
+    ':brand' => $brand,
+    ':name' => $name,
+    ':img' => $img,
+    ':id_box' => $box,
+    ':year_release' => $year,
+    ':engine' => $capacity,
+    ':rental' => $rental
+  ]);
+
   $response = [
-    "status" => 200,
-    "message" => "Ok"
+    "status" => 201,
+    "message" => "Успешно добавлен"
   ];
-  http_response_code(200);
+  http_response_code(201);
   echo json_encode($response);
 }
 

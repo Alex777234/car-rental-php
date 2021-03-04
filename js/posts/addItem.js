@@ -17,10 +17,6 @@ const renderResponse = (json) => {
   }
   if (json.status === 201) {
     alert(json.message);
-    document.location.href = '/';
-  }
-  if (json.status === 200) {
-    alert(json.message);
   }
 }
 
@@ -51,20 +47,17 @@ selectBrand.addEventListener('change', function () {
   }
 });
 
+
+console.log(image.files);
 // Get value in File
 image.addEventListener('change', () => {
   if (!['image/png'].includes(image.files[0].type)) {
     alert('Картинка должна быть в PNG формате');
     image.classList.add('input_error');
   } else {
-    if (image.files[0] === '') {
-      image.classList.add('input_error');
-    } else {
-      console.log(image.files[0]);
-      image.classList.remove('input_error');
-      image.classList.add('input_success');
-      formData.append('image', image.files[0]);
-    }
+    image.classList.remove('input_error');
+    image.classList.add('input_success');
+    formData.append('image', image.files[0]);
   }
 });
 
@@ -146,6 +139,10 @@ const addNewAuto = async () => {
     price.classList.remove('input_error');
     price.classList.add('input_success');
     formData.append('rental', price.value);
+  }
+
+  if (image.files.length === 0) {
+    image.classList.add('input_error');
   }
 
   let response = await fetch(`${URL_PATH}addProduct.php`, {
