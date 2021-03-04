@@ -11,14 +11,13 @@ $year = $_POST['year'];
 $capacity = $_POST['capacity'];
 $rental = $_POST['rental'];
 
-// if (!empty($_FILES['image']['tmp_name'])) {
-//   $path = __DIR__ . "\\upload\\upload-files" . $_FILES['image']['name']; // путь загрузки файла 
-//   if (copy($_FILES['image']['tmp_name'], $path)) {
-//     $img = $path;
-//   }
-// }
 
-$img = addslashes(file_get_contents($_FILES['image']['tmp_name']));
+if (!empty($_FILES['image']['tmp_name'])) {
+  $path = __DIR__ . "/upload-files/" . md5("asdjla32423vxvmxzc90820434mnasdm324").time() . ".png";
+  if (copy($_FILES['image']['tmp_name'], $path)) {
+    $img = md5("asdjla32423vxvmxzc90820434mnasdm324").time() . ".png";
+  }
+}
 
 if ($brand == '' || $name == '' || $box == '' || $year == '' || $capacity == '' || $rental == '') {
   $response = [
@@ -26,7 +25,7 @@ if ($brand == '' || $name == '' || $box == '' || $year == '' || $capacity == '' 
     "message" => "Проверьте правильность полей"
   ];
   http_response_code(400);
-  echo json_encode($img);
+  echo json_encode($response);
 } 
 else {
   $query = $pdo->prepare("INSERT INTO `product` (`id_brand`, `name_auto`, `img_auto`, `id_box`, `year_release`, `engine_capacity`, `price_rental`)

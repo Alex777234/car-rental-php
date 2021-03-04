@@ -48,7 +48,6 @@ selectBrand.addEventListener('change', function () {
 });
 
 
-console.log(image.files);
 // Get value in File
 image.addEventListener('change', () => {
   if (!['image/png'].includes(image.files[0].type)) {

@@ -158,6 +158,35 @@
                 </div>
               </div>
             </div>
+            <?php
+              require '../config/connect.php';
+              $query = $pdo->query("SELECT * FROM `product` INNER JOIN `type_box` ON product.id_box = type_box.id_type");
+              while($row = $query->fetch(PDO::FETCH_OBJ)) {
+                echo '
+                  <div class="col-xl-4 col-lg-4 col-md-6">
+                  <div class="news-card autopark-card">
+                    <div class="news-card__image">
+                      <img src="../controllers/upload-files/'.$row->img_auto.'" alt="Изображение автомобиля" class="news-card__img">
+                    </div>
+                    <h3 class="news-card__title">'.$row->name_auto.'</h3>
+                    <a href="pages/autopark.php" class="btn news-card__btn">Забронировать</a>
+                    <div class="news-card__info">
+                      <span class="news-card__setting">
+                        <img src="../img/news/settings.svg" alt="Иконка карточки">
+                        '.$row->name_type.'</span>
+                      <span class="news-card__setting">
+                        <img src="../img/news/calendar.svg" alt="Иконка карточки">
+                        '.$row->year_release.'</span>
+                      <span class="news-card__setting">
+                        <img src="../img/news/paper.svg" alt="Иконка карточки">
+                        '.$row->engine_capacity.'</span>
+                    </div>
+                  </div>
+                </div>
+                ';
+              }
+              
+            ?>
           </div>
         </div>
       </div>

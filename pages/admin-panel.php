@@ -133,8 +133,13 @@
           <label for="id-auto">ID авто</label>
           <select name="id-auto" id="id-auto" class="panel-form__select">
             <option value="0">Добавить новый автомобиль</option>
-            <option value="1">1</option>
-            <option value="2">2</option>
+            <?php 
+              require '../config/connect.php';
+              $query = $pdo->query('SELECT * FROM `product`');
+              while ($row = $query->fetch(PDO::FETCH_OBJ)) {
+                echo '<option name="option" value="'.$row->id_product.'">'.$row->id_product.'</option>';
+              }
+            ?>
           </select>
 
           <label for="brand">Марка авто</label>
