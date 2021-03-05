@@ -7,6 +7,8 @@ const selectTypeBox = document.getElementById('type-box');
 const selectYear = document.getElementById('year');
 const selectCapacity = document.getElementById('capacity');
 const image = document.getElementById('file');
+const nameAuto = document.querySelector('input[name="name"]');
+const price = document.querySelector('input[name="rental"]');
 
 const formData = new FormData();
 
@@ -18,15 +20,29 @@ const renderResponse = (json) => {
   if (json.status === 201) {
     alert(json.message);
   }
+  if (json.status === 200) {
+    image.disabled = true;
+    nameAuto.value = json.values.name_auto;
+    selectBrand.value = json.values.id_brand;
+    selectTypeBox.value = json.values.id_type;
+    selectYear.value = json.values.year_release;
+    if (!/\./.test(json.values.engine_capacity)) {
+      selectCapacity.value = json.values.engine_capacity + '.0';
+    }
+    price.value = json.values.price_rental;
+  }
 }
 
 // Get value option in ID Auto
 selectId.addEventListener('change', function () {
   value = this.value;
   if (value === '0') {
+    image.disabled = false;
     currentId = 0;
     regUserBtn.textContent = 'Добавить';
   } else {
+    formData.append('id_auto', new Number(value));
+    getInfoForID();
     currentId = 1;
     regUserBtn.textContent = 'Изменить';
   }
@@ -117,6 +133,7 @@ const switchBtn = () => {
   }
   else {
     console.log('Функция изменения');
+    updateAuto();
   }
 }
 
@@ -145,6 +162,44 @@ const addNewAuto = async () => {
   }
 
   let response = await fetch(`${URL_PATH}addProduct.php`, {
+    method: 'POST',
+    body: formData
+  })
+    .then((response) => response.json())
+    .then(res => renderResponse(res))
+}
+
+const updateAuto = async () => {
+  let name = document.querySelector('input[name="name"]');
+  let price = document.querySelector('input[name="rental"]');
+
+  if (!/^([a-z-A-Z]+\s)([a-z-A-Z-0-9]+$|([a-z-A-Z-0-9]+\s)[a-z-A-Z-0-9]+)$/.test(name.value) || name.value === '') {
+    name.classList.add('input_error');
+  } else {
+    name.classList.remove('input_error');
+    name.classList.add('input_success');
+    formData.append('name', name.value);
+  }
+
+  if (!/^\d+$/.test(price.value) || price.value === '') {
+    price.classList.add('input_error');
+  } else {
+    price.classList.remove('input_error');
+    price.classList.add('input_success');
+    formData.append('rental', price.value);
+  }
+
+  let response = await fetch(`${URL_PATH}updateProduct.php`, {
+    method: 'POST',
+    body: formData
+  })
+    .then((response) => response.json())
+    .then(res => renderResponse(res))
+}
+
+const getInfoForID = async () => {
+
+  let response = await fetch(`${URL_PATH}getProduct.php`, {
     method: 'POST',
     body: formData
   })

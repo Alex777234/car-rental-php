@@ -137,31 +137,17 @@
           <button class="btn filter__btn">Применить</button>
         </div>
         <div class="col-xl-9">
-          <div class="row">
-            <div class="col-xl-4 col-lg-4 col-md-6">
-              <div class="news-card autopark-card">
-                <div class="news-card__image">
-                  <img src="../img/news/car_1.png" alt="Изображение автомобиля" class="news-card__img">
-                </div>
-                <h3 class="news-card__title">BMW 320</h3>
-                <a href="pages/autopark.php" class="btn news-card__btn">Забронировать</a>
-                <div class="news-card__info">
-                  <span class="news-card__setting">
-                    <img src="../img/news/settings.svg" alt="Иконка карточки">
-                    АКПП</span>
-                  <span class="news-card__setting">
-                    <img src="../img/news/calendar.svg" alt="Иконка карточки">
-                    2020</span>
-                  <span class="news-card__setting">
-                    <img src="../img/news/paper.svg" alt="Иконка карточки">
-                    2.0 л</span>
-                </div>
-              </div>
-            </div>
+          <div class="row"> 
             <?php
               require '../config/connect.php';
               $query = $pdo->query("SELECT * FROM `product` INNER JOIN `type_box` ON product.id_box = type_box.id_type");
               while($row = $query->fetch(PDO::FETCH_OBJ)) {
+                $volume = 0;
+                if (preg_match("/\./", $row->engine_capacity)) {
+                  $volume = $row->engine_capacity;
+                } else {
+                  $volume = $row->engine_capacity . ".0";
+                }
                 echo '
                   <div class="col-xl-4 col-lg-4 col-md-6">
                   <div class="news-card autopark-card">
@@ -179,7 +165,7 @@
                         '.$row->year_release.'</span>
                       <span class="news-card__setting">
                         <img src="../img/news/paper.svg" alt="Иконка карточки">
-                        '.$row->engine_capacity.'</span>
+                        '.$volume.'</span>
                     </div>
                   </div>
                 </div>
