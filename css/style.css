@@ -511,6 +511,7 @@ a:focus {
 .news-card {
   box-sizing: border-box;
   height: auto;
+  min-height: 450px;
   border-radius: 5px;
   padding: 0 20px 20px 20px;
   background-color: rgba(0,0,0, 0.03);
@@ -535,6 +536,17 @@ a:focus {
   font-size: 20px;
   font-weight: 800;
   margin-top: 15px;
+  text-align: center;
+  line-height: 30px;
+  height: 50px;
+}
+
+.news-card__price {
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  color: var(--activeColor);
+  margin-top: 20px;
+  font-size: 20px;
 }
 
 .news-card__btn {
@@ -969,6 +981,10 @@ a:focus {
   width: 100%;
   box-sizing: border-box;
   padding-left: 5px;
+}
+
+.panel-form__input_delete {
+  margin-bottom: 15px;
 }
 
 input[type="file"] {

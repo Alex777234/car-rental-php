@@ -5,7 +5,14 @@ INSERT INTO `brands` (`name_brand`) VALUES ('Acura'),('Adler'),('Alfa Romeo'),('
 INSERT INTO `type_box` (`name_type`) VALUES ('АКПП'),('МКПП')
 
 
-Регулярка для проверка авто
-^([a-z-A-Z]+\s)([a-z-A-Z-0-9]+$|([a-z-A-Z-0-9]+\s)[a-z-A-Z-0-9]+)$
-
-^\d+$
+ДАМП АВТОМОБИЛЕЙ:
+INSERT INTO `product` (`id_brand`, `name_auto`, `img_auto`, `id_box`, `year_release`, `engine_capacity`, `price_rental`)
+VALUES ('131','Mercedes AMG S63','0b65af7f2357d3fa0ee8d8972d7e0646.png','1','2020','4.0','7800'),
+('11','Aston Martin DB11','263d7e75f0c88646ead4a09a21f19873.png','1','2021','5.0','6500'),
+('30','Bugatti CHIRON Sport300','e5b5ea7c27cd293b4295a69d2e324ad5.png','2','2019','8.0','9500'),
+('34','Cadillaс Escalade','f2e3f2b2db112d8291803d38d52123e1.png','1','2016','6.0','5600'),
+('110','Lamborghini Huracan','793514409cd3a793594b74f506b884c6.png','1','2018','5.0','5600'),
+('71','Ford Mustang GT5','a8cbff5a1c189b063013dfe6f071c9f1.png','2','2019','5.0','4300'),
+('156','Porshe 911 Turbo','8903936685c0776cc0bc10b64d585949.png','1','2020','3.0','6300'),
+('194','Tesla Model S','bc250e0d83c37b0953ada14e7bbc1dfd.png','1','2018','2.0','3500'),
+('142','Nissan GT R','8928603cd5f39e8583cf8becbc180bd2.png','1','2015','4.0','5700')

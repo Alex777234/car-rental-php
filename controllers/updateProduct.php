@@ -43,6 +43,7 @@ else {
 
   $response = [
     "status" => 200,
+    "status_id" => 1,
     "message" => "Успешно обновлён"
   ];
   http_response_code(200);

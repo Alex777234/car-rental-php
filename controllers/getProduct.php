@@ -15,7 +15,8 @@ $row = $query->fetch(PDO::FETCH_OBJ);
 
 $response = [
   "status" => 200,
-  "message" => "Успешно обновлён",
+  "message" => "Запрос успешно обработан",
+  "status_id" => 0,
   "values" => $row
 ];
 http_response_code(200);

@@ -19,13 +19,22 @@ const renderResponse = (json) => {
   }
   if (json.status === 201) {
     alert(json.message);
+    location.reload();
   }
-  if (json.status === 200) {
+  if (json.status_id === 1) {
+    alert(json.message);
+    location.reload();
+  } else {
     image.disabled = true;
+    image.classList.remove('input_error');
     nameAuto.value = json.values.name_auto;
+    nameAuto.classList.remove('input_error');
+    nameAuto.classList.add('input_success');
     selectBrand.value = json.values.id_brand;
     selectTypeBox.value = json.values.id_type;
     selectYear.value = json.values.year_release;
+    price.classList.remove('input_error');
+    price.classList.add('input_success');
     if (!/\./.test(json.values.engine_capacity)) {
       selectCapacity.value = json.values.engine_capacity + '.0';
     }
@@ -128,25 +137,21 @@ regUserBtn.addEventListener('click', (e) => {
 
 const switchBtn = () => {
   if (currentId === 0) {
-    console.log('Функция добавления');
     addNewAuto();
   }
   else {
-    console.log('Функция изменения');
     updateAuto();
   }
 }
 
 const addNewAuto = async () => {
-  let name = document.querySelector('input[name="name"]');
-  let price = document.querySelector('input[name="rental"]');
 
-  if (!/^([a-z-A-Z]+\s)([a-z-A-Z-0-9]+$|([a-z-A-Z-0-9]+\s)[a-z-A-Z-0-9]+)$/.test(name.value) || name.value === '') {
-    name.classList.add('input_error');
+  if (!/^([a-z-A-Z]+\s)([a-z-A-Z-0-9]+$|([a-z-A-Z-0-9]+\s)[a-z-A-Z-0-9]+)$/.test(nameAuto.value) || nameAuto.value === '') {
+    nameAuto.classList.add('input_error');
   } else {
-    name.classList.remove('input_error');
-    name.classList.add('input_success');
-    formData.append('name', name.value);
+    nameAuto.classList.remove('input_error');
+    nameAuto.classList.add('input_success');
+    formData.append('name', nameAuto.value);
   }
 
   if (!/^\d+$/.test(price.value) || price.value === '') {
@@ -170,15 +175,13 @@ const addNewAuto = async () => {
 }
 
 const updateAuto = async () => {
-  let name = document.querySelector('input[name="name"]');
-  let price = document.querySelector('input[name="rental"]');
 
-  if (!/^([a-z-A-Z]+\s)([a-z-A-Z-0-9]+$|([a-z-A-Z-0-9]+\s)[a-z-A-Z-0-9]+)$/.test(name.value) || name.value === '') {
-    name.classList.add('input_error');
+  if (!/^([a-z-A-Z]+\s)([a-z-A-Z-0-9]+$|([a-z-A-Z-0-9]+\s)[a-z-A-Z-0-9]+)$/.test(nameAuto.value) || nameAuto.value === '') {
+    nameAuto.classList.add('input_error');
   } else {
-    name.classList.remove('input_error');
-    name.classList.add('input_success');
-    formData.append('name', name.value);
+    nameAuto.classList.remove('input_error');
+    nameAuto.classList.add('input_success');
+    formData.append('name', nameAuto.value);
   }
 
   if (!/^\d+$/.test(price.value) || price.value === '') {

@@ -15,7 +15,6 @@
 </head>
 
 <body>
-
 <header class="header">
     <div class="container header__content">
       <address class="address">
@@ -114,18 +113,18 @@
           <h3 class="filter__title">Фильтр поиска</h3>
           <div class="filter__stamp">
             <h4 class="filter__subtitle">Марка авто</h4>
-            <label for="mercedes" class="filter__label">
-              <input type="checkbox" name="" id="mercedes">
-              Mercedes-Benz
-            </label>
-            <label for="bmw" class="filter__label">
-              <input type="checkbox" name="" id="bmw">
-              BMW
-            </label>
-            <label for="audi" class="filter__label">
-              <input type="checkbox" name="" id="audi">
-              Audi
-            </label>
+            <?php 
+              require '../config/connect.php';
+              $query = $pdo->query("SELECT * FROM `brands`");
+              while($row = $query->fetch(PDO::FETCH_OBJ)) {
+                echo '
+                  <label for="check_'.$row->id_brand.'" class="filter__label">
+                    <input type="checkbox" name="checkbox-name_'.$row->id_brand.'" id="check_'.$row->id_brand.'">
+                    '.$row->name_brand.'
+                  </label>
+                ';
+              }
+            ?>
           </div>
           <div class="filter__price">
             <h4 class="filter__subtitle">Цена бронирования</h4>
@@ -155,6 +154,7 @@
                       <img src="../controllers/upload-files/'.$row->img_auto.'" alt="Изображение автомобиля" class="news-card__img">
                     </div>
                     <h3 class="news-card__title">'.$row->name_auto.'</h3>
+                    <span class="news-card__price">'.$row->price_rental.' ₽</span>
                     <a href="pages/autopark.php" class="btn news-card__btn">Забронировать</a>
                     <div class="news-card__info">
                       <span class="news-card__setting">

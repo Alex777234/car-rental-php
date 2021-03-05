@@ -187,7 +187,11 @@
             <option value="2.5">2.5</option>
             <option value="3.0">3.0</option>
             <option value="3.5">3.5</option>
+            <option value="4.0">4.0</option>
+            <option value="4.5">4.5</option>
             <option value="5.0">5.0</option>
+            <option value="6.0">6.0</option>
+            <option value="8.0">8.0</option>
           </select>
 
           <label for="rental">Стоимость аренды (за сутки)</label>
@@ -199,18 +203,25 @@
       <div class="col-xl-6 col-lg-6 panel panel__content">
         <h2 class="panel__title">Удалить авто</h2>
         <form class="panel-form">
-          <label for="select-brands">
-            ID авто
-            <select name="" id="" >
-              <option value="">1</option>
-              <option value="">2</option>
-            </select>
-          </label>
-          <label for="">
-            Название авто
-            <input type="text" id="">
-          </label>
-          <button type="submit" class="btn panel-form__btn">Удалить</button>
+
+          <label for="id-auto-delete">ID авто</label>
+          <select name="id-auto_del" id="id-auto-delete" class="panel-form__select">
+            <option value="0">Выберите ID авто из списка</option>
+            <?php 
+              require '../config/connect.php';
+              $query = $pdo->query('SELECT * FROM `product`');
+              while ($row = $query->fetch(PDO::FETCH_OBJ)) {
+                echo '<option name="option" value="'.$row->id_product.'">'.$row->id_product.'</option>';
+              }
+            ?>
+          </select>
+
+          <label for="name_del">Название авто</label>
+          <input type="text" name="name_del" id="name_del" class="panel-form__input panel-form__input_delete" disabled>
+
+          <img src="" id="admin-image" alt="Выберите ID авто для показа изображения">
+
+          <button type="submit" class="btn panel-form__btn" id="removeItem">Удалить</button>
         </form>
       </div>
       </div>
@@ -266,6 +277,7 @@
 
   <script src="../js/main.js"></script>
   <script src="../js/posts/addItem.js"></script>
+  <script src="../js/posts/deleteItem.js"></script>
 </body>
 
 </html>
