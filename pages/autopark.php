@@ -109,7 +109,14 @@
   <section class="autopark">
     <div class="container">
       <div class="row">
-        <div class="col-xl-3 filter filter__content">
+        <div class="col-xl-12 panel panel__content">
+          <h2 class="panel__title">Найти авто</h2>
+          <form class="panel-form panel-form__search">
+            <input type="search" name="search" id="search" placeholder="Введите название авто">
+            <button type="submit" class="btn panel-form__btn panel-form__btn_search" id="searchBtn">Найти</button>
+          </form>
+        </div>
+        <div class="col-xl-3 filter">
           <h3 class="filter__title">Фильтр поиска</h3>
           <div class="filter__stamp">
             <h4 class="filter__subtitle">Марка авто</h4>
@@ -136,43 +143,7 @@
           <button class="btn filter__btn">Применить</button>
         </div>
         <div class="col-xl-9">
-          <div class="row"> 
-            <?php
-              require '../config/connect.php';
-              $query = $pdo->query("SELECT * FROM `product` INNER JOIN `type_box` ON product.id_box = type_box.id_type");
-              while($row = $query->fetch(PDO::FETCH_OBJ)) {
-                $volume = 0;
-                if (preg_match("/\./", $row->engine_capacity)) {
-                  $volume = $row->engine_capacity;
-                } else {
-                  $volume = $row->engine_capacity . ".0";
-                }
-                echo '
-                  <div class="col-xl-4 col-lg-4 col-md-6">
-                  <div class="news-card autopark-card">
-                    <div class="news-card__image">
-                      <img src="../controllers/upload-files/'.$row->img_auto.'" alt="Изображение автомобиля" class="news-card__img">
-                    </div>
-                    <h3 class="news-card__title">'.$row->name_auto.'</h3>
-                    <span class="news-card__price">'.$row->price_rental.' ₽</span>
-                    <a href="pages/autopark.php" class="btn news-card__btn">Забронировать</a>
-                    <div class="news-card__info">
-                      <span class="news-card__setting">
-                        <img src="../img/news/settings.svg" alt="Иконка карточки">
-                        '.$row->name_type.'</span>
-                      <span class="news-card__setting">
-                        <img src="../img/news/calendar.svg" alt="Иконка карточки">
-                        '.$row->year_release.'</span>
-                      <span class="news-card__setting">
-                        <img src="../img/news/paper.svg" alt="Иконка карточки">
-                        '.$volume.'</span>
-                    </div>
-                  </div>
-                </div>
-                ';
-              }
-              
-            ?>
+          <div class="row autopark__content"> 
           </div>
         </div>
       </div>
@@ -227,6 +198,10 @@
 </footer>
 
   <script src="../js/main.js"></script>
+  <script src="../js/posts/getItemAll.js"></script>
 </body>
 
 </html>
+
+<!-- <h2 class="panel__title">Найти авто</h2>
+<input type="search" name="search" id="search" placeholder="Введите название авто"> -->

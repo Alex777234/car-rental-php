@@ -119,13 +119,6 @@
         </div>
       </div>
       <div class="row admin__content">
-      <div class="col-xl-12 panel panel__content">
-        <h2 class="panel__title">Найти авто</h2>
-        <form class="panel-form panel-form__search">
-          <input type="search" name="" id="search" placeholder="Введите название авто">
-          <button type="submit" class="btn panel-form__btn">Найти</button>
-        </form>
-      </div>
       <div class="col-xl-6 col-lg-6 panel panel__content">
         <h2 class="panel__title">Добавить | Изменить авто</h2>
         <form class="panel-form">
@@ -276,6 +269,7 @@
 </footer>
 
   <script src="../js/main.js"></script>
+  <script src="../js/posts/searchItem.js"></script>
   <script src="../js/posts/addItem.js"></script>
   <script src="../js/posts/deleteItem.js"></script>
 </body>

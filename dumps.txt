@@ -16,3 +16,43 @@ VALUES ('131','Mercedes AMG S63','0b65af7f2357d3fa0ee8d8972d7e0646.png','1','202
 ('156','Porshe 911 Turbo','8903936685c0776cc0bc10b64d585949.png','1','2020','3.0','6300'),
 ('194','Tesla Model S','bc250e0d83c37b0953ada14e7bbc1dfd.png','1','2018','2.0','3500'),
 ('142','Nissan GT R','8928603cd5f39e8583cf8becbc180bd2.png','1','2015','4.0','5700')
+
+
+
+
+<?php
+              require '../config/connect.php';
+              $query = $pdo->query("SELECT * FROM `product` INNER JOIN `type_box` ON product.id_box = type_box.id_type");
+              while($row = $query->fetch(PDO::FETCH_OBJ)) {
+                $volume = 0;
+                if (preg_match("/\./", $row->engine_capacity)) {
+                  $volume = $row->engine_capacity;
+                } else {
+                  $volume = $row->engine_capacity . ".0";
+                }
+                echo '
+                  <div class="col-xl-4 col-lg-4 col-md-6">
+                  <div class="news-card autopark-card">
+                    <div class="news-card__image">
+                      <img src="../controllers/upload-files/'.$row->img_auto.'" alt="Изображение автомобиля" class="news-card__img">
+                    </div>
+                    <h3 class="news-card__title">'.$row->name_auto.'</h3>
+                    <span class="news-card__price">'.$row->price_rental.' ₽</span>
+                    <a href="pages/autopark.php" class="btn news-card__btn">Забронировать</a>
+                    <div class="news-card__info">
+                      <span class="news-card__setting">
+                        <img src="../img/news/settings.svg" alt="Иконка карточки">
+                        '.$row->name_type.'</span>
+                      <span class="news-card__setting">
+                        <img src="../img/news/calendar.svg" alt="Иконка карточки">
+                        '.$row->year_release.'</span>
+                      <span class="news-card__setting">
+                        <img src="../img/news/paper.svg" alt="Иконка карточки">
+                        '.$volume.'</span>
+                    </div>
+                  </div>
+                </div>
+                ';
+              }
+              
+            ?>

@@ -937,6 +937,7 @@ a:focus {
 .panel-form__search {
   display: flex;
   align-items: center;
+  position: relative;
 }
 
 #search {
@@ -996,6 +997,11 @@ input[type="file"] {
   margin: 20px auto 0 auto;
   background: none;
 }
+
+.panel-form__btn_search {
+  margin-top: 0;
+}
+
 
 .panel-form__btn:hover {
   background-color: var(--activeColor);
