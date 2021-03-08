@@ -136,11 +136,11 @@
           <div class="filter__price">
             <h4 class="filter__subtitle">Цена бронирования</h4>
             <div class="filter__price_row">
-              <input type="text" placeholder="От">
-              <input type="text" placeholder="До">
+              <input type="text" name="price_min" placeholder="От">
+              <input type="text" name="price_max" placeholder="До">
             </div>
           </div>
-          <button class="btn filter__btn">Применить</button>
+          <button class="btn filter__btn" id="filterBtn">Применить</button>
         </div>
         <div class="col-xl-9">
           <div class="row autopark__content"> 
