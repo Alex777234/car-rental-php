@@ -4,7 +4,7 @@ session_start();
 require '../config/connect.php';
 
 $name = $_POST['name']; 
-$query = $pdo->prepare("SELECT * FROM `product`WHERE `name_auto` LIKE ?");
+$query = $pdo->prepare("SELECT * FROM `product` WHERE `name_auto` LIKE ?");
 $params = ["%$name%"];
 $query->execute($params);
 

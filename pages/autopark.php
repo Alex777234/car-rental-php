@@ -125,8 +125,8 @@
               $query = $pdo->query("SELECT * FROM `brands`");
               while($row = $query->fetch(PDO::FETCH_OBJ)) {
                 echo '
-                  <label for="check_'.$row->id_brand.'" class="filter__label">
-                    <input type="checkbox" name="checkbox-name_'.$row->id_brand.'" id="check_'.$row->id_brand.'">
+                  <label for="'.$row->id_brand.'" class="filter__label">
+                    <input type="checkbox" name="checkbox-name[]" id="'.$row->id_brand.'">
                     '.$row->name_brand.'
                   </label>
                 ';
@@ -199,6 +199,7 @@
 
   <script src="../js/main.js"></script>
   <script src="../js/posts/getItemAll.js"></script>
+  <script src="../js/posts/filterItem.js"></script>
 </body>
 
 </html>

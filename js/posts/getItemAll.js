@@ -2,7 +2,6 @@ const URL_PATH = '../controllers/';
 const row = document.querySelector('.autopark__content');
 const search = document.querySelector('input[name="search"]');
 const seachBtn = document.querySelector('#searchBtn');
-const filterBtn = document.querySelector('#filterBtn');
 
 const fsData = new FormData();
 
@@ -18,7 +17,9 @@ const renderResponse = (json) => {
     renderSearchCard(json.values);
   }
 }
+// ==================================
 
+// Show all Auto when page is loaded
 document.addEventListener('DOMContentLoaded', async () => {
   let response = await fetch(`${URL_PATH}getAllProduct.php`, {
     method: 'POST'
@@ -49,6 +50,9 @@ seachBtn.addEventListener('click', async (e) => {
     .then((response) => response.json())
     .then(res => renderResponse(res))
 });
+
+
+// ==================================
 
 // Render All card product
 const renderCard = (json) => {
@@ -110,3 +114,4 @@ const renderSearchCard = (json) => {
   `);
   });
 }
+
