@@ -41,7 +41,7 @@
                 echo $_SESSION['admin']['name'];
               }
             } else {
-              echo '<img src="img/user.svg" alt="Иконка пользователя">';
+              echo '<img src="../img/user.svg" alt="Иконка пользователя">';
             }
           ?>
       </a>
