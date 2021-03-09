@@ -101,17 +101,9 @@
                 <th class="price__table_bold">Объём</th>
                 <th class="price__table_bold">Цена (за сутки)</th>
               </tr>
-              <tr>
-                <td>1</td>
-                <td>Mercedes-Benz GLC</td>
-                <td>АКПП</td>
-                <td>2018</td>
-                <td>2.0</td>
-                <td>5200₽</td>
-              </tr>
                 <?php
                 require '../config/connect.php';
-                $query = $pdo->query("SELECT * FROM `product` INNER JOIN `type_box` ON product.id_box = type_box.id_type");
+                $query = $pdo->query("SELECT * FROM `product` INNER JOIN `type_box` ON product.id_box = type_box.id_type ORDER BY `id_product`");
                 while($row = $query->fetch(PDO::FETCH_OBJ)) {
                   $volume = '';
                   if (preg_match("/\./", $row->engine_capacity)) {

@@ -95,6 +95,11 @@
                     <li class="drop-menu-list__item"><a href="pages/contact.php"
                         class="drop-menu-list__link">Контакты</a>
                     </li>
+                    <?php
+                      if ($_SESSION['admin']) {
+                        echo '<li class="drop-menu-list__item"><a href="/pages/admin-panel.php" class="drop-menu-list__link">Работа с БД</a></li>';
+                      }
+                    ?>
                   </ul>
                 </nav>
 
