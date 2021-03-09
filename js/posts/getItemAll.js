@@ -2,6 +2,9 @@ const URL_PATH = '../controllers/';
 const row = document.querySelector('.autopark__content');
 const search = document.querySelector('input[name="search"]');
 const seachBtn = document.querySelector('#searchBtn');
+const dropRental = document.querySelector('.drop-rental');
+const dropRentalClose = document.querySelector('.drop-rental_close');
+const dropRentalBlock = document.querySelector('.drop-rental__block');
 
 const fsData = new FormData();
 
@@ -71,16 +74,23 @@ const renderCard = (json) => {
       </div>
       <h3 class="news-card__title">${el.name_auto}</h3>
       <span class="news-card__price">${el.price_rental} ₽</span>
-      <a href="pages/autopark.php" class="btn news-card__btn">Забронировать</a>
+      <a href="#" class="btn news-card__btn" onclick="showDropRental()">Забронировать</a>
       <div class="news-card__info">
         <span class="news-card__setting"><img src="../img/news/settings.svg" alt="Иконка карточки">${el.name_type}</span>
         <span class="news-card__setting"><img src="../img/news/calendar.svg" alt="Иконка карточки">${el.year_release}</span>
         <span class="news-card__setting"><img src="../img/news/paper.svg" alt="Иконка карточки">${volume}</span>
       </div>
     </div>
-  </div>
-  `);
+    </div>
+    `);
   });
+}
+
+const showDropRental = (name) => {
+  // e.preventDefault();
+  dropRental.classList.toggle('drop-rental_active');
+  dropRentalBlock.classList.toggle('drop-rental__block_active');
+  console.log(name);
 }
 
 // Render Card from Search
@@ -103,7 +113,7 @@ const renderSearchCard = (json) => {
       </div>
       <h3 class="news-card__title">${el.name_auto}</h3>
       <span class="news-card__price">${el.price_rental} ₽</span>
-      <a href="pages/autopark.php" class="btn news-card__btn">Забронировать</a>
+      <a class="btn news-card__btn">Забронировать</a>
       <div class="news-card__info">
         <span class="news-card__setting"><img src="../img/news/settings.svg" alt="Иконка карточки">${el.name_type}</span>
         <span class="news-card__setting"><img src="../img/news/calendar.svg" alt="Иконка карточки">${el.year_release}</span>
@@ -115,3 +125,9 @@ const renderSearchCard = (json) => {
   });
 }
 
+
+dropRentalClose.addEventListener('click', (e) => {
+  e.preventDefault();
+  dropRentalBlock.classList.toggle('drop-rental__block_active');
+  dropRental.classList.toggle('drop-rental_active');
+});

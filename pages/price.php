@@ -109,14 +109,28 @@
                 <td>2.0</td>
                 <td>5200₽</td>
               </tr>
-              <tr>
-                <td>2</td>
-                <td>BMW 320</td>
-                <td>АКПП</td>
-                <td>2020</td>
-                <td>2.0</td>
-                <td>4600₽</td>
-              </tr>
+                <?php
+                require '../config/connect.php';
+                $query = $pdo->query("SELECT * FROM `product` INNER JOIN `type_box` ON product.id_box = type_box.id_type");
+                while($row = $query->fetch(PDO::FETCH_OBJ)) {
+                  $volume = '';
+                  if (preg_match("/\./", $row->engine_capacity)) {
+                    $volume = $row->engine_capacity;
+                  } else {
+                    $volume = $row->engine_capacity . ".0";
+                  }
+                  echo '
+                  <tr>
+                    <td>'.$row->id_product.'</td>
+                    <td>'.$row->name_auto.'</td>
+                    <td>'.$row->name_type.'</td>
+                    <td>'.$row->year_release.'</td>
+                    <td>'.$volume.'</td>
+                    <td>'.$row->price_rental.'₽</td>
+                  </tr>
+                  ';
+                }
+              ?>
             </table>
           </div>
         </div>

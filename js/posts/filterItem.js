@@ -1,6 +1,6 @@
 const PATH = '../controllers/';
 const filterBtn = document.querySelector('#filterBtn');
-const checkbox = document.getElementsByName('checkbox-name[]');
+const checkbox = document.getElementsByName('checkbox-name');
 const min = document.querySelector('input[name="price_min"]');
 const max = document.querySelector('input[name="price_max"]');
 
@@ -78,7 +78,7 @@ const renderCardBrand = (json) => {
       </div>
       <h3 class="news-card__title">${el.name_auto}</h3>
       <span class="news-card__price">${el.price_rental} ₽</span>
-      <a href="pages/autopark.php" class="btn news-card__btn">Забронировать</a>
+      <a class="btn news-card__btn">Забронировать</a>
       <div class="news-card__info">
         <span class="news-card__setting"><img src="../img/news/settings.svg" alt="Иконка карточки">${el.name_type}</span>
         <span class="news-card__setting"><img src="../img/news/calendar.svg" alt="Иконка карточки">${el.year_release}</span>

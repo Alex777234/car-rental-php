@@ -508,6 +508,114 @@ a:focus {
 }
 
 /* news section */
+.drop-rental {
+  transform: translateY(100%);
+  transition: 0.3s;
+  transition-delay: 0.3s;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0,0,0, 0.6);
+}
+
+.drop-rental_active {
+  transform: translateY(0);
+  transition: 0.3s;
+}
+
+.drop-rental__content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.drop-rental__block {
+  height: auto;
+  width: 550px;
+  padding: 30px;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  transform: translateX(-1500%);
+  transition: 0.5s;
+}
+.drop-rental__block_active {
+  transform: translateX(0);
+  transition: 0.5s;
+}
+
+.drop-rental__title {
+  font-size: 25px;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-bottom: 25px;
+}
+
+.drop-rental-list__item {
+  margin-bottom: 15px;
+  color: var(--activeColor);
+  font-weight: 500;
+}
+
+.drop-rental-list__item > span {
+  margin-left: 5px;
+  font-size: 14px;
+  color: var(--black);
+}
+
+.drop-rental__block > label {
+  margin-top: 25px;
+  display: flex;
+  flex-direction: column;
+}
+
+.drop-rental__block > label > input {
+  height: 40px;
+  width: 250px;
+  margin-top: 15px;
+  border: 2px solid var(--activeColor);
+  font-family: 'Montserrat', 'Arial', sans-serif;
+  font-weight: 500;
+  padding-left: 10px;
+}
+
+.drop-rental__price {
+  font-size: 20px;
+  margin-top: 25px;
+}
+
+.drop-rental__price > span {
+  font-weight: 700;
+}
+
+.drop-rental__btn {
+  background: none;
+  transition: 0.3s;
+  margin: 30px auto 0 auto;
+}
+
+.drop-rental__btn:hover {
+  background-color: var(--activeColor);
+  color: white;
+  transition: 0.3s;
+}
+
+.drop-rental_close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-size: 50px;
+  text-decoration: none;
+  color: var(--black);
+  font-weight: 600;
+}
+
+
 .news-card {
   box-sizing: border-box;
   height: auto;
@@ -551,6 +659,7 @@ a:focus {
 
 .news-card__btn {
   margin: 30px auto 0 auto;
+  cursor: pointer;
 }
 
 .news-card__info {
@@ -1048,6 +1157,11 @@ input[type="file"] {
   .panel__title {
     text-align: center;
   }
+  .drop-rental_close {
+    font-size: 30px;
+    top: 5px;
+    right: 5px;
+  }
 }
 
 /* Medium devices (tablets, 768px and up) */
@@ -1075,6 +1189,9 @@ input[type="file"] {
   .about__text {
     width: 100%;
     text-align: justify;
+  }
+  .drop-rental__block {
+    width: 95%;
   }
 }
 

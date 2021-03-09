@@ -126,7 +126,7 @@
               while($row = $query->fetch(PDO::FETCH_OBJ)) {
                 echo '
                   <label for="'.$row->id_brand.'" class="filter__label">
-                    <input type="checkbox" name="checkbox-name[]" id="'.$row->id_brand.'">
+                    <input type="checkbox" name="checkbox-name" id="'.$row->id_brand.'">
                     '.$row->name_brand.'
                   </label>
                 ';
@@ -143,12 +143,28 @@
           <button class="btn filter__btn" id="filterBtn">Применить</button>
         </div>
         <div class="col-xl-9">
-          <div class="row autopark__content"> 
+          <div class="row autopark__content">
           </div>
         </div>
       </div>
     </div>
   </section>
+  <div class="drop-rental drop-rental__content">
+    <div class="drop-rental__block">
+      <h3 class="drop-rental__title">Бронирование авто</h3>
+      <ul class="drop-rental-list">
+        <li class="drop-rental-list__item">Название авто:<span>Aston Martin</span></li>
+        <li class="drop-rental-list__item">Аренда за сутки авто:<span>Aston Martin</span></li>
+      </ul>
+      <label for="date">
+        Выберите конечную дату
+        <input type="date" name="date" id="date">
+      </label>
+      <p class="drop-rental__price">Итого: <span>15000₽</span></p>
+      <button type="submit" class="btn drop-rental__btn">Забронировать</button>
+      <a href="#" class="drop-rental_close">&times;</a>
+    </div>
+  </div>
 </main>
 
 <footer class="footer">
@@ -197,9 +213,9 @@
   </div>
 </footer>
 
-  <script src="../js/main.js"></script>
-  <script src="../js/posts/getItemAll.js"></script>
-  <script src="../js/posts/filterItem.js"></script>
+<script src="../js/posts/getItemAll.js"></script>
+<script src="../js/main.js"></script>
+<script src="../js/posts/filterItem.js"></script>
 </body>
 
 </html>
