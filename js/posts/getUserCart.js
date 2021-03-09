@@ -9,6 +9,10 @@ const renderResponse = (json) => {
   if (json.status === 200) {
     renderCard(json.values);
   }
+  if (json.status_id === 1) {
+    alert(json.message);
+    location.reload();
+  }
 }
 // ==================================
 
@@ -26,18 +30,35 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 // Render All card product
 const renderCard = (json) => {
-  json.map((el) => {
+  if (json.length === 0) {
     row.insertAdjacentHTML('afterbegin',
-      '<div class="col-xl-12 history-card">' +
-      `<img src="${URL_PATH}/upload-files/${el.img_auto}" alt="Изображение автомобиля" class="history-card__img">` +
-      `<h3 class="history-card__title">${el.name_auto}</h3>` +
-      '<ul class="history-card-list">' +
-      `<li class="history-card-list__item">Год выпуска <span>${el.year_release}</span></li>` +
-      `<li class="history-card-list__item">Стоимость брони <span>${el.price_rental}</span></li>` +
-      `<li class="history-card-list__item">Окочание брони <span>${el.date_rental}</span></li>` +
-      '</ul>' +
-      `<a href="#" class="btn history-card__btn">Отменить бронь</a>` +
-      '</div >'
+      '<p>Упс, вы ещё ничего не бронировали</p>'
     );
-  });
+  } else {
+    json.map((el) => {
+      row.insertAdjacentHTML('afterbegin',
+        '<div class="col-xl-12 history-card">' +
+        `<img src="${URL_PATH}/upload-files/${el.img_auto}" alt="Изображение автомобиля" class="history-card__img">` +
+        `<h3 class="history-card__title">${el.name_auto}</h3>` +
+        '<ul class="history-card-list">' +
+        `<li class="history-card-list__item">Год выпуска <span>${el.year_release}</span></li>` +
+        `<li class="history-card-list__item">Стоимость брони <span>${el.price_rental}</span></li>` +
+        `<li class="history-card-list__item">Окочание брони <span>${el.date_rental}</span></li>` +
+        '</ul>' +
+        '<a href="#" class="btn history-card__btn" onclick="deleteCar(\'' + el.id_product + '\')">Отменить бронь</a>' +
+        '</div >'
+      );
+    });
+  }
+}
+
+const deleteCar = async (id) => {
+  let formData = new FormData();
+  formData.append('id_product', id)
+  let response = await fetch(`${URL_PATH}delUserCart.php`, {
+    method: 'POST',
+    body: formData
+  })
+    .then((response) => response.json())
+    .then(res => renderResponse(res))
 }
