@@ -153,14 +153,14 @@
     <div class="drop-rental__block">
       <h3 class="drop-rental__title">Бронирование авто</h3>
       <ul class="drop-rental-list">
-        <li class="drop-rental-list__item">Название авто:<span id="span_name">Aston Martin</span></li>
-        <li class="drop-rental-list__item">Аренда за сутки авто:<span id="span_rental">Aston Martin</span></li>
+        <li class="drop-rental-list__item">Название авто:<span id="span_name"></span></li>
+        <li class="drop-rental-list__item">Аренда за сутки авто:<span id="span_rental"></span></li>
       </ul>
       <label for="date">
         Выберите конечную дату
         <input type="date" name="date" id="date">
       </label>
-      <p class="drop-rental__price">Итого: <span id="span_price">15000₽</span></p>
+      <p class="drop-rental__price">Итого: <span id="span_price"></span></p>
       <button type="submit" class="btn drop-rental__btn" id="rentalBtn">Забронировать</button>
       <a href="#" class="drop-rental_close">&times;</a>
     </div>

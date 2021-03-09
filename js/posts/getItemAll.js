@@ -101,8 +101,8 @@ function showDropRental(name, price, id) {
   dropRental.classList.toggle('drop-rental_active');
   dropRentalBlock.classList.toggle('drop-rental__block_active');
   spanName.textContent = name;
-  spanRental.textContent = price;
-  spanPrice.textContent = price;
+  spanRental.textContent = price + "₽";
+  spanPrice.textContent = price + "₽";
 
   let form = new FormData();
   form.append('id_product', id_product);
@@ -121,13 +121,19 @@ function showDropRental(name, price, id) {
 
   date.addEventListener('change', () => {
     form.append('date', date.value);
-    console.log(date.value);
     date.style.border = "2px solid rgb(203, 255, 203)";
+    const date1 = new Date(date.min);
+    const date2 = new Date(date.value);
+    const timeDiff = Math.abs(date2.getTime() - date1.getTime());
+    let diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
+    diffDays++;
+    spanPrice.textContent = price * diffDays + '₽';
   });
 
 
   rentalBtn.addEventListener('click', async (e) => {
     e.preventDefault();
+
     let response = await fetch(`${URL_PATH}addRental.php`, {
       method: 'POST',
       body: form

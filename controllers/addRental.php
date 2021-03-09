@@ -21,10 +21,10 @@ $query = $pdo->prepare("SELECT * FROM `user_cart` WHERE `id_user` = :user");
 $query->execute([':user' => $user_id]);
 $row = $query->fetch(PDO::FETCH_OBJ);
 
-if ($row == 2) {
+if ($row > 0) {
   $response = [
     "status" => 400,
-    "message" => "Вы уже бронировали себе 2 авто. Отмените бронь в личном кабинете преждем чем забронировать новый автомобиль."
+    "message" => "Вы уже бронировали себе авто. Отмените бронь в личном кабинете преждем чем забронировать новый автомобиль."
   ];
   http_response_code(400);
   echo json_encode($response);
@@ -54,7 +54,6 @@ if ($row == 2) {
     http_response_code(201);
     echo json_encode($response);
   }
-  
 }
 
 ?>
