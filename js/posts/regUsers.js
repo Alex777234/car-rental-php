@@ -6,7 +6,6 @@ const renderResponse = (json) => {
     alert(json.message);
   }
   if (json.status === 201) {
-    alert(json.message);
     document.location.href = '/';
   }
 }

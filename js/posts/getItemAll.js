@@ -22,7 +22,6 @@ const renderResponse = (json) => {
     renderCard(json.values);
   }
   if (json.status === 201) {
-    alert(json.message);
     location.reload();
   }
   if (json.status_id === 1) {

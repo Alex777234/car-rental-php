@@ -16,5 +16,3 @@ VALUES ('131','Mercedes AMG S63','0b65af7f2357d3fa0ee8d8972d7e0646.png','1','202
 ('156','Porshe 911 Turbo','8903936685c0776cc0bc10b64d585949.png','1','2020','3.0','6300'),
 ('194','Tesla Model S','bc250e0d83c37b0953ada14e7bbc1dfd.png','1','2018','2.0','3500'),
 ('142','Nissan GT R','8928603cd5f39e8583cf8becbc180bd2.png','1','2015','4.0','5700')
-
-

@@ -31,7 +31,7 @@ dropCabinetImage.addEventListener('click', () => {
 // Remove drop-menu when coordsY > 400px
 window.onscroll = () => {
   let currentScrollPos = window.pageYOffset;
-  if (currentScrollPos > 400) {
+  if (currentScrollPos > 450) {
     drop.classList.remove('drop__block_active');
     burgerSpan.classList.remove('burger__item_active');
   }

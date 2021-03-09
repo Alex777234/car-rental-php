@@ -10,7 +10,6 @@ const renderResponse = (json) => {
     renderCard(json.values);
   }
   if (json.status_id === 1) {
-    alert(json.message);
     location.reload();
   }
 }
@@ -32,7 +31,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 const renderCard = (json) => {
   if (json.length === 0) {
     row.insertAdjacentHTML('afterbegin',
-      '<p>Упс, вы ещё ничего не бронировали</p>'
+      '<p class="history_ops">Упс, вы ещё ничего не бронировали</p>'
     );
   } else {
     json.map((el) => {
@@ -54,11 +53,14 @@ const renderCard = (json) => {
 
 const deleteCar = async (id) => {
   let formData = new FormData();
-  formData.append('id_product', id)
-  let response = await fetch(`${URL_PATH}delUserCart.php`, {
-    method: 'POST',
-    body: formData
-  })
-    .then((response) => response.json())
-    .then(res => renderResponse(res))
+  formData.append('id_product', id);
+  let conf = confirm("Вы уверены, что хотите отменить бронь?");
+  if (conf) {
+    let response = await fetch(`${URL_PATH}delUserCart.php`, {
+      method: 'POST',
+      body: formData
+    })
+      .then((response) => response.json())
+      .then(res => renderResponse(res))
+  }
 }

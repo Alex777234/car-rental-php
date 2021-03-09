@@ -5,12 +5,7 @@ const renderResponse = (json) => {
   if (json.status === 400) {
     alert(json.message);
   }
-  if (json.status === 201) {
-    alert(json.message);
-    document.location.href = '/';
-  }
   if (json.status === 200) {
-    alert(json.message);
     document.location.href = '/';
   }
 }

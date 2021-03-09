@@ -33,7 +33,17 @@
         }
       ?></a>
       <a class="cabinet_hide">
-        <img src="img/user.svg" alt="Иконка пользователя">
+        <?php
+          if ($_SESSION['user'] || $_SESSION['admin']) {
+            if ($_SESSION['user']) {
+              echo $_SESSION['user']['name'];
+            } else {
+              echo $_SESSION['admin']['name'];
+            }
+          } else {
+            echo '<img src="img/user.svg" alt="Иконка пользователя">';
+          }
+        ?>
       </a>
       <div class="drop-cabinet drop__cabinet">
         <?php 

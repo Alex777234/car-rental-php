@@ -361,7 +361,7 @@ a:focus {
   left: 0;
   transform: translateY(-150%);
   transition: 0.7s;
-  height: 400px;
+  height: 450px;
   width: 100%;
   background-color: white;
   box-shadow: 0 8px 10px rgba(0,0,0, 0.09);
@@ -1137,6 +1137,7 @@ input[type="file"] {
   font-weight: 500;
 }
 
+
 .history-card {
   height: 100px;
   box-shadow: 0 0 30px rgba(0,0,0, 0.07);
@@ -1220,8 +1221,8 @@ input[type="file"] {
     margin-bottom: 20px;
     margin-right: 0;
   }
-  .admin__name, .admin__title {
-    text-align: center;
+  .history_ops {
+    line-height: 25px;
   }
   .panel__title {
     text-align: center;
@@ -1305,7 +1306,7 @@ input[type="file"] {
   .contact__image {
     display: none;
   }
-  .history__welcome, .history__text {
+  .history__welcome, .history__text, .history_ops {
     text-align: center;
   }
   .history-card {

@@ -1,5 +1,8 @@
 <?php 
   session_start();
+  if(!isset($_SESSION['user'])) {
+    header("Location: /");
+  }
 ?>
 <!DOCTYPE html>
 <html lang="ru">
@@ -8,7 +11,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Главная | Liberti car</title>
+  <title>Личный кабинет | Liberti car</title>
   <link rel="stylesheet" href="../css/reset.css">
   <link rel="stylesheet" href="../css/bootstrap-grid.min.css">
   <link rel="stylesheet" href="../css/style.css">
@@ -33,16 +36,26 @@
         }
       ?></a>
       <a class="cabinet_hide">
-        <img src="../img/user.svg" alt="Иконка пользователя">
+      <?php
+            if ($_SESSION['user'] || $_SESSION['admin']) {
+              if ($_SESSION['user']) {
+                echo $_SESSION['user']['name'];
+              } else {
+                echo $_SESSION['admin']['name'];
+              }
+            } else {
+              echo '<img src="img/user.svg" alt="Иконка пользователя">';
+            }
+          ?>
       </a>
       <div class="drop-cabinet drop__cabinet">
         <?php 
           if ($_SESSION['user'] || $_SESSION['admin']) {
-            echo '<a href="pages/cabinet.php" class="drop-cabinet__link_empty">Личный кабинет</a>';
-            echo '<a href="controllers/exitUser.php" class="drop-cabinet__link_empty">Выход</a>';
+            echo '<a class="drop-cabinet__link_empty">Личный кабинет</a>';
+            echo '<a href="../controllers/exitUser.php" class="drop-cabinet__link_empty">Выход</a>';
           } else {
-            echo '<a href="authorization.php" class="drop-cabinet__link">Авторизация</a>';
-            echo '<a href="registration.php" class="drop-cabinet__link">Регистрация</a>';
+            echo '<a href="../authorization.php" class="drop-cabinet__link">Авторизация</a>';
+            echo '<a href="../registration.php" class="drop-cabinet__link">Регистрация</a>';
           }
         ?>
       </div>
@@ -53,7 +66,7 @@
    <section class="navigation">
       <div class="container navigation__block">
         <div class="logo">
-          <a class="logo__btn">Liberti car</a>
+          <a href="../index.php" class="logo__btn">Liberti car</a>
           <p class="logo__desc">Прокат автомобилей</p>
         </div>
         <nav class="nav">
@@ -65,7 +78,7 @@
             <li class="nav-list__item"><a href="contact.php" class="nav-list__link">Контакты</a></li>
             <?php
               if ($_SESSION['admin']) {
-                echo '<li class="nav-list__item"><a href="#" class="nav-list__link">| Работа с БД</a></li>';
+                echo '<li class="nav-list__item"><a href="admin-panel.php" class="nav-list__link">| Работа с БД</a></li>';
               }
             ?>
           </ul>
@@ -95,6 +108,11 @@
                     <li class="drop-menu-list__item"><a href="contact.php"
                         class="drop-menu-list__link">Контакты</a>
                     </li>
+                    <?php
+                      if ($_SESSION['admin']) {
+                        echo '<li class="drop-menu-list__item"><a href="admin-panel.php" class="drop-menu-list__link">Работа с БД</a></li>';
+                      }
+                    ?>
                   </ul>
                 </nav>
               </div>
