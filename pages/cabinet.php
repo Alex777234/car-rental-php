@@ -113,10 +113,16 @@
       </div>
       </section>
 
-   <section>
+   <section class="history history__content">
      <div class="container">
-       <h1 style="margin: 150px 0; font-size: 30px;">Привет, <?php echo $_SESSION['user']['name']?></h1>
-     </div>
+       <h1 class="history__welcome">Привет, <span><?php echo $_SESSION['user']['name']?></span></h1>
+       <p class="history__text">Ваша текущая бронь:</p>
+      </div>
+      <div class="container">
+        <div class="row">
+          <div class="history__row"></div>
+        </div>
+      </div>
    </section> 
   </main>
 
@@ -168,6 +174,7 @@
   </footer>
 
   <script src="../js/main.js"></script>
+  <script src="../js/posts/getUserCart.js"></script>
 </body>
 
 </html>

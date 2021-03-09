@@ -3,21 +3,21 @@
 session_start();
 require '../config/connect.php';
 
-$name = $_POST['name']; 
-$query = $pdo->prepare("SELECT * FROM `product` INNER JOIN `type_box` ON product.id_box = type_box.id_type WHERE `name_auto` LIKE ?");
-$params = ["%$name%"];
-$query->execute($params);
+$id_user = $_SESSION['user']['id']; 
+$query = $pdo->prepare("SELECT * FROM `user_cart`
+  INNER JOIN `product` ON user_cart.id_product = product.id_product
+  WHERE `id_user` = :user ORDER BY `date_rental`
+");
+$query->execute([':user' => $id_user]);
 
 $row = $query->fetchAll(PDO::FETCH_OBJ);
 
 $response = [
   "status" => 200,
   "message" => "Запрос успешно обработан",
-  "status_id" => 1,
   "values" => $row
 ];
 http_response_code(200);
 echo json_encode($response);
-
 
 ?>

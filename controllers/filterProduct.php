@@ -16,7 +16,7 @@ if ($brand == '' && $price_min == '' && $price_min == '') {
   exit();
 } else {
   if ($price_min == '' || $price_max == '') {
-    $query = $pdo->prepare("SELECT * FROM `product` WHERE `id_brand` = :id");
+    $query = $pdo->prepare("SELECT * FROM `product` INNER JOIN `type_box` ON product.id_box = type_box.id_type WHERE `id_brand` = :id");
     $query->execute([':id' => $brand]);
     $row = $query->fetchAll(PDO::FETCH_OBJ);
   
@@ -29,7 +29,7 @@ if ($brand == '' && $price_min == '' && $price_min == '') {
     http_response_code(200);
     echo json_encode($response);
   } elseif ($brand == '') {
-    $query = $pdo->prepare("SELECT * FROM `product` WHERE `price_rental` > :price_min AND `price_rental` <= :price_max");
+    $query = $pdo->prepare("SELECT * FROM `product` INNER JOIN `type_box` ON product.id_box = type_box.id_type WHERE `price_rental` > :price_min AND `price_rental` <= :price_max");
     $query->execute([
       ':price_min' => $price_min,
       ':price_max' => $price_max
@@ -44,7 +44,7 @@ if ($brand == '' && $price_min == '' && $price_min == '') {
     http_response_code(200);
     echo json_encode($response);
   } else {
-    $query = $pdo->prepare("SELECT * FROM `product` WHERE `id_brand` = :id AND `price_rental` > :price_min AND `price_rental` <= :price_max");
+    $query = $pdo->prepare("SELECT * FROM `product` INNER JOIN `type_box` ON product.id_box = type_box.id_type WHERE `id_brand` = :id AND `price_rental` > :price_min AND `price_rental` <= :price_max");
     $query->execute([
       ':id' => $brand,
       ':price_min' => $price_min,

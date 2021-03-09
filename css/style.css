@@ -564,6 +564,7 @@ a:focus {
 
 .drop-rental-list__item > span {
   margin-left: 5px;
+  font-weight: 700;
   font-size: 14px;
   color: var(--black);
 }
@@ -1116,6 +1117,74 @@ input[type="file"] {
   background-color: var(--activeColor);
 }
 
+/* cabinet section */
+.history__content {
+  margin: 150px 0 250px 0;
+}
+
+.history__welcome {
+  font-size: 30px;
+  font-weight: 700;
+}
+
+.history__welcome > span {
+  color: var(--activeColor);
+}
+
+.history__text {
+  margin: 30px 0;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.history-card {
+  height: 100px;
+  box-shadow: 0 0 30px rgba(0,0,0, 0.07);
+  border-radius: 5px;
+  display: flex;
+  padding: 25px;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 30px;
+}
+
+.history-card__img {
+  max-width: 12%;
+}
+
+.history-card__title {
+  font-size: 18px;
+  width: 20%;
+  line-height: 25px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.history-card-list {
+  display: flex;
+}
+
+.history-card-list__item {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  line-height: 25px;
+  color: var(--activeColor);
+  font-weight: 600;
+}
+
+.history-card-list__item:not(:last-child) {
+  margin-right: 40px;
+}
+
+.history-card-list__item > span {
+  margin-top: 10px;
+  color: var(--black);
+  font-weight: 500;
+}
+
+
+
 /* Media queries */
 /* Small devices (landscape phones, 576px and up) */
 @media (max-width: 576px) {
@@ -1161,6 +1230,12 @@ input[type="file"] {
     font-size: 30px;
     top: 5px;
     right: 5px;
+  }
+  .history-card-list {
+    flex-direction: column;
+  }
+  .history-card-list__item {
+    margin-bottom: 30px;
   }
 }
 
@@ -1230,6 +1305,30 @@ input[type="file"] {
   .contact__image {
     display: none;
   }
+  .history__welcome, .history__text {
+    text-align: center;
+  }
+  .history-card {
+    flex-direction: column;
+    height: auto;
+  }
+  .history-card__img {
+    max-width: 50%;
+  }
+  .history-card__title {
+    margin: 35px auto;
+    width: 100%;
+  }
+  .history-card-list {
+    width: 100%;
+    justify-content: space-around;
+  }
+  .history-card-list__item {
+    margin-right: 0 !important;
+  }
+  .history-card__btn {
+    margin: 30px auto;
+  }
 }
 
 /* X-Large devices (large desktops, 1200px and up) */
@@ -1268,6 +1367,12 @@ input[type="file"] {
   .contact__image {
     max-width: 80%;
     top: -15% !important;
+  }
+  .history-card {
+    min-height: 150px;
+  }
+  .history-card-list__item:not(:last-child) {
+    margin-right: 5px;
   }
 }
 

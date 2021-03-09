@@ -5,6 +5,11 @@ const seachBtn = document.querySelector('#searchBtn');
 const dropRental = document.querySelector('.drop-rental');
 const dropRentalClose = document.querySelector('.drop-rental_close');
 const dropRentalBlock = document.querySelector('.drop-rental__block');
+const spanName = document.getElementById('span_name');
+const spanRental = document.getElementById('span_rental');
+const spanPrice = document.getElementById('span_price');
+const date = document.getElementById('date');
+const rentalBtn = document.getElementById('rentalBtn');
 
 const fsData = new FormData();
 
@@ -15,6 +20,10 @@ const renderResponse = (json) => {
   }
   if (json.status === 200) {
     renderCard(json.values);
+  }
+  if (json.status === 201) {
+    alert(json.message);
+    location.reload();
   }
   if (json.status_id === 1) {
     renderSearchCard(json.values);
@@ -66,32 +75,68 @@ const renderCard = (json) => {
     } else {
       volume = el.engine_capacity + '.0';
     }
-    row.insertAdjacentHTML('afterbegin', `
-    <div class="col-xl-4 col-lg-4 col-md-6">
-    <div class="news-card autopark-card">
-      <div class="news-card__image">
-        <img src="../controllers/upload-files/${el.img_auto}" alt="Изображение автомобиля" class="news-card__img">
-      </div>
-      <h3 class="news-card__title">${el.name_auto}</h3>
-      <span class="news-card__price">${el.price_rental} ₽</span>
-      <a href="#" class="btn news-card__btn" onclick="showDropRental()">Забронировать</a>
-      <div class="news-card__info">
-        <span class="news-card__setting"><img src="../img/news/settings.svg" alt="Иконка карточки">${el.name_type}</span>
-        <span class="news-card__setting"><img src="../img/news/calendar.svg" alt="Иконка карточки">${el.year_release}</span>
-        <span class="news-card__setting"><img src="../img/news/paper.svg" alt="Иконка карточки">${volume}</span>
-      </div>
-    </div>
-    </div>
-    `);
+    row.insertAdjacentHTML('afterbegin',
+      '<div class="col-xl-4 col-lg-4 col-md-6">' +
+      '<div class="news-card autopark-card">' +
+      '<div class="news-card__image">' +
+      `<img src="../controllers/upload-files/${el.img_auto}" alt="Изображение автомобиля" class="news-card__img">` +
+      '</div>' +
+      `<h3 class="news-card__title">${el.name_auto}</h3>` +
+      `<span class="news-card__price">${el.price_rental} ₽</span>` +
+      '<a href="#" class="btn news-card__btn" onclick="showDropRental(\'' + el.name_auto + '\', + \'' + el.price_rental + '\', + \'' + el.id_product + '\')">Забронировать</a>' +
+      '<div class="news-card__info">' +
+      `<span class="news-card__setting"><img src="../img/news/settings.svg" alt="Иконка карточки">${el.name_type}</span>` +
+      `<span class="news-card__setting"><img src="../img/news/calendar.svg" alt="Иконка карточки">${el.year_release}</span>` +
+      `<span class="news-card__setting"><img src="../img/news/paper.svg" alt="Иконка карточки">${volume}</span>` +
+      '</div>' +
+      '</div>' +
+      '</div>'
+    );
   });
 }
 
-const showDropRental = (name) => {
-  // e.preventDefault();
+// Show popup rental
+function showDropRental(name, price, id) {
+  let id_product = id;
   dropRental.classList.toggle('drop-rental_active');
   dropRentalBlock.classList.toggle('drop-rental__block_active');
-  console.log(name);
+  spanName.textContent = name;
+  spanRental.textContent = price;
+  spanPrice.textContent = price;
+
+  let form = new FormData();
+  form.append('id_product', id_product);
+
+  let time = new Date();
+  let month = time.getMonth() + 1;
+  let day = time.getDate() + 1;
+  if (month / 10 < 1) {
+    month = '0' + month;
+  }
+  if (day / 10 < 1) {
+    day = '0' + day;
+  }
+
+  date.setAttribute('min', `${time.getFullYear()}` + '-' + `${month}` + '-' + `${day}`);
+
+  date.addEventListener('change', () => {
+    form.append('date', date.value);
+    console.log(date.value);
+    date.style.border = "2px solid rgb(203, 255, 203)";
+  });
+
+
+  rentalBtn.addEventListener('click', async (e) => {
+    e.preventDefault();
+    let response = await fetch(`${URL_PATH}addRental.php`, {
+      method: 'POST',
+      body: form
+    })
+      .then((response) => response.json())
+      .then(res => renderResponse(res))
+  });
 }
+
 
 // Render Card from Search
 const renderSearchCard = (json) => {
@@ -105,23 +150,23 @@ const renderSearchCard = (json) => {
     } else {
       volume = el.engine_capacity + '.0';
     }
-    row.insertAdjacentHTML('afterbegin', `
-    <div class="col-xl-4 col-lg-4 col-md-6">
-    <div class="news-card autopark-card">
-      <div class="news-card__image">
-        <img src="../controllers/upload-files/${el.img_auto}" alt="Изображение автомобиля" class="news-card__img">
-      </div>
-      <h3 class="news-card__title">${el.name_auto}</h3>
-      <span class="news-card__price">${el.price_rental} ₽</span>
-      <a class="btn news-card__btn">Забронировать</a>
-      <div class="news-card__info">
-        <span class="news-card__setting"><img src="../img/news/settings.svg" alt="Иконка карточки">${el.name_type}</span>
-        <span class="news-card__setting"><img src="../img/news/calendar.svg" alt="Иконка карточки">${el.year_release}</span>
-        <span class="news-card__setting"><img src="../img/news/paper.svg" alt="Иконка карточки">${volume}</span>
-      </div>
-    </div>
-  </div>
-  `);
+    row.insertAdjacentHTML('afterbegin',
+      '<div class="col-xl-4 col-lg-4 col-md-6">' +
+      '<div class="news-card autopark-card">' +
+      '<div class="news-card__image">' +
+      `<img src="../controllers/upload-files/${el.img_auto}" alt="Изображение автомобиля" class="news-card__img">` +
+      '</div>' +
+      `<h3 class="news-card__title">${el.name_auto}</h3>` +
+      `<span class="news-card__price">${el.price_rental} ₽</span>` +
+      '<a href="#" class="btn news-card__btn" onclick="showDropRental(\'' + el.name_auto + '\', + \'' + el.price_rental + '\')">Забронировать</a>' +
+      '<div class="news-card__info">' +
+      `<span class="news-card__setting"><img src="../img/news/settings.svg" alt="Иконка карточки">${el.name_type}</span>` +
+      `<span class="news-card__setting"><img src="../img/news/calendar.svg" alt="Иконка карточки">${el.year_release}</span>` +
+      `<span class="news-card__setting"><img src="../img/news/paper.svg" alt="Иконка карточки">${volume}</span>` +
+      '</div>' +
+      '</div>' +
+      '</div>'
+    );
   });
 }
 
