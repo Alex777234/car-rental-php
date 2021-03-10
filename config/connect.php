@@ -1,11 +1,11 @@
 <?php 
 
 $host = "localhost";
-$db_name = "id14690773_car_rental";
-$user = "id14690773_car_rental_admin";
-$pass = "I&*!_}s1LV^Js<C<";
+$db_name = "car-rental";
+$user = "root";
+$pass = "root";
 
-$dsn = "mysql:host=$localhost;dbname=$db_name";
+$dsn = "mysql:host=$host;dbname=$db_name";
 $pdo = new PDO($dsn, $user, $pass);
 
 ?>

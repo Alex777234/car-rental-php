@@ -78,7 +78,7 @@ const renderCardBrand = (json) => {
       '</div>' +
       `<h3 class="news-card__title">${el.name_auto}</h3>` +
       `<span class="news-card__price">${el.price_rental} ₽</span>` +
-      '<a href="#" class="btn news-card__btn" onclick="showDropRental(\'' + el.name_auto + '\', + \'' + el.price_rental + '\')">Забронировать</a>' +
+      '<a href="#" class="btn news-card__btn" onclick="showDropRental(\'' + el.name_auto + '\', + \'' + el.price_rental + '\', + \'' + el.id_product + '\')">Забронировать</a>' +
       '<div class="news-card__info">' +
       `<span class="news-card__setting"><img src="../img/news/settings.svg" alt="Иконка карточки">${el.name_type}</span>` +
       `<span class="news-card__setting"><img src="../img/news/calendar.svg" alt="Иконка карточки">${el.year_release}</span>` +
